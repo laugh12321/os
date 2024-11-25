@@ -33,5 +33,5 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: stable-os-8-iso
-        path: ${{ env.OUTPUT_DIR }}/${{ env.FNAME }}.iso
+        path: ./builds/amd64/elementaryos-8.0-stable.20241125rc.iso
       if: success()  # 只有当构建成功时才上传artifacts
