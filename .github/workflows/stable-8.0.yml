@@ -25,3 +25,13 @@ jobs:
     - name: Build and upload stable .iso
       run: |
         ./workflows.sh etc/terraform-stable-8.0-azure.conf "${{ secrets.key }}" "${{ secrets.secret }}" "${{ secrets.endpoint }}" "${{ secrets.bucket }}"
+      env:
+        OUTPUT_DIR: /path/to/output  # 确保这个路径是你的ISO文件生成的路径
+        FNAME: elementaryos-stable-8.0  # 确保这个变量符合你的ISO文件命名规则
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: stable-os-8-iso
+        path: ${{ env.OUTPUT_DIR }}/${{ env.FNAME }}.iso
+      if: success()  # 只有当构建成功时才上传artifacts
